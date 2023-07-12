@@ -16,10 +16,11 @@ provider "aws" {
   secret_key = "1B7rsjMFoCA3xBKtsnwVB0+aTekVGNWBxhc1V/4w"
 }
 
-resource "aws_instance" "ec2demo" {
+resource "aws_instance" "ec2demo"  {
   ami       =  "ami-06b79cf2aee0d5c92"
   instance_type = "t2.micro"
   
+        user_data = file("maven-install.sh")
   tags = {
     Name = "maven_node"
   }
