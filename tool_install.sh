@@ -14,4 +14,8 @@ $sudo yum install ansible
 $sudo yum install -y yum-utils
 $sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
 $sudo yum -y install terraform
-$terraform -version
+$yum install docker -y
+$usermod -a -G docker ec2-user
+$systemctl enable docker
+$systemctl start docker
+
