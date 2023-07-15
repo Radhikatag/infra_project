@@ -1,0 +1,16 @@
+---
+ - hosts: 172.31.82.67
+   tasks:
+     - name: download apache url
+       get_url:
+         url: https://dlcdn.apache.org/maven/maven-3/3.9.3/binaries/apache-maven-3.9.3-bin.tar.gz
+         dest: /opt
+         mode: '0755'
+     - name: Extract the tar filr
+       unarchive:
+         src: /opt/apache-maven-3.9.3-bin.tar.gz
+         dest: /opt
+         remote_src: True
+    
+
+  
