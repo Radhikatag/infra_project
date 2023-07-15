@@ -1,16 +1,24 @@
 ---
- - hosts: 172.31.82.67
+ - hosts: 172.31.81.9
    tasks:
      - name: download apache url
        get_url:
          url: https://dlcdn.apache.org/maven/maven-3/3.9.3/binaries/apache-maven-3.9.3-bin.tar.gz
          dest: /opt
          mode: '0755'
-     - name: Extract the tar filr
+     - name: Extract the tar file
        unarchive:
          src: /opt/apache-maven-3.9.3-bin.tar.gz
          dest: /opt
          remote_src: True
-    
-
-  
+     - name: Removing tar file
+       file:
+         path: /opt/apache-maven-3.9.3-bin.tar.gz
+         state: absent
+     - name: Renaming a file
+       command: mv /opt/apache-maven-3.9.3 /opt/maven
+     - name: Set environment variable
+       lineinfile: dest=/root/.bashrc line='export PATH=$PATH:/opt/maven/bin' insertafter= 'EOF' regexp='export PATH=\$PATH:/opt/maven/bin' state=present
+     - name: Source the bashrc file
+       shell: source /root/.bashrc
+       remote_user: root

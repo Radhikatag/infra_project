@@ -1,0 +1,15 @@
+---
+ - hosts: 172.31.81.9
+   become: yes
+   tasks:
+     - name: install java
+       yum:
+         name: java-1.8.0-openjdk
+         state: present
+     - name: Downloading required tomcat
+       get_url:
+         url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.78/bin/apache-tomcat-9.0.78.tar.gz
+         dest: /usr/local
+    
+
+       
